@@ -12,6 +12,8 @@ async function getWeather() {
 	const feelsLike = document.createElement('h1');
 	feelsLike.innerText = weatherData.main.feels_like;
 	body.appendChild(feelsLike);
+
+	return weatherData;
 }
 
-getWeather();
+let weather = getWeather();
