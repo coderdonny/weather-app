@@ -10,8 +10,14 @@ async function getWeather() {
 	console.log(weatherData);
 
 	const feelsLike = document.createElement('h1');
+	const temp = document.createElement('h1');
+	const weather = document.createElement('h1');
 	feelsLike.innerText = weatherData.main.feels_like;
+	temp.innerText = weatherData.main.temp;
+	weather.innerText = weatherData.wind.deg;
 	body.appendChild(feelsLike);
+	body.appendChild(temp);
+	body.appendChild(weather);
 
 	return weatherData;
 }
