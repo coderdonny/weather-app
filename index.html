@@ -10,9 +10,22 @@
 </head>
 
 <body>
-    <form action="">
-        <label for="city"></label>
-        <input type="search" name="" id="city">
+    <form action="" class="search-form">
+        <fieldset>
+            <legend>Select the units for measurement:</legend>
+            <div>
+                <input type="radio" id="metric" name="drone" value="metric" checked>
+                <label for="metric">Metric</label>
+            </div>
+
+            <div>
+                <input type="radio" id="imperial" name="drone" value="imperial">
+                <label for="imperial">Imperial</label>
+            </div>
+        </fieldset>
+        <label for="location"></label>
+        <input type="search" name="" id="location">
+
         <button>search</button>
     </form>
 

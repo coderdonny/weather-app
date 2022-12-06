@@ -1,36 +1,29 @@
 const body = document.querySelector('body');
+const search = document.querySelector('#location');
+const searchForm = document.querySelector('.search-form');
+const unitsOfMeasurement = document.querySelector('#units');
 
-async function getLocation() {
+searchForm.addEventListener('submit', function (e) {
+	e.preventDefault();
+	let location = search.value;
+	let units = unitsOfMeasurement.value;
+	console.log(location);
+});
+
+async function getLocation(location) {
+	const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=0ba7cce150f486819412ea0336b94a65
+	`;
 	try {
-		const response = await fetch(
-			`http://api.openweathermap.org/geo/1.0/direct?q=Toronto&appid=0ba7cce150f486819412ea0336b94a65
-			`,
-			{ mode: 'cors' }
-		);
+		const response = await fetch(url, { mode: 'cors' });
 		const locationData = await response.json();
 
 		console.log('latitude:' + ' ' + locationData[0].lat);
 		console.log('longitude:' + ' ' + locationData[0].lon);
 
-		return locationData;
+		getWeather(locationData[0].lat, locationData[0].lon);
 	} catch (error) {
 		console.log(error);
 	}
-}
-
-getLocation().then((data) => {
-	getCoordinates(data);
-});
-
-function getCoordinates(data) {
-	let lat = data[0].lat;
-	let lon = data[0].lon;
-
-	getWeather(lat, lon).then((data) => {
-		console.log(data.weather[0].main);
-		console.log(data);
-		handleData(data);
-	});
 }
 
 async function getWeather(lat, lon) {
@@ -40,14 +33,34 @@ async function getWeather(lat, lon) {
 		const response = await fetch(url, { mode: 'cors' });
 		const weatherData = await response.json();
 
-		return weatherData;
+		handleData(weatherData);
 	} catch (error) {
 		console.log(error);
 	}
 }
 
 function handleData(weatherData) {
+	let weather = weatherData.weather[0].main;
 	let feelsLike = weatherData.main.feels_like;
 	let temp = weatherData.main.temp;
 	let wind = weatherData.wind.deg;
+
+	let weatherDataObj = {
+		weather: weather,
+		feelsLike: feelsLike,
+		temperature: temp,
+		wind: wind,
+	};
+
+	console.log(weatherDataObj);
+	displayData(weatherDataObj);
+}
+
+function displayData(data) {
+	const weather = document.createElement('h1');
+	weather.innerText = data.weather;
+	const temp = document.createElement('h1');
+	temp.innerText = data.temperature;
+	body.append(weather);
+	body.append(temp);
 }
