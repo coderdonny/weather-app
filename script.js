@@ -4,11 +4,26 @@ const searchForm = document.querySelector('.search-form');
 const unitsOfMeasurement = document.querySelector('#units');
 
 searchForm.addEventListener('submit', function (e) {
+	clearUI();
+
+	document.querySelector('button').disabled = true;
+	setTimeout(function () {
+		document.querySelector('button').disabled = false;
+	}, 1000);
+
 	e.preventDefault();
 	let location = search.value;
 	console.log(location);
 	getLocation(location);
 });
+
+function clearUI() {
+	let first = weatherContainer.firstElementChild;
+	while (first) {
+		first.remove();
+		first = weatherContainer.firstElementChild;
+	}
+}
 
 async function getLocation(location) {
 	const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=0ba7cce150f486819412ea0336b94a65
