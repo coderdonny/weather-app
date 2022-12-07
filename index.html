@@ -11,18 +11,15 @@
 
 <body>
     <form action="" class="search-form">
-        <fieldset>
-            <legend>Select the units for measurement:</legend>
-            <div>
-                <input type="radio" id="metric" name="drone" value="metric" checked>
-                <label for="metric">Metric</label>
-            </div>
 
-            <div>
-                <input type="radio" id="imperial" name="drone" value="imperial">
-                <label for="imperial">Imperial</label>
-            </div>
-        </fieldset>
+        <label for="units">Choose measurement units:</label>
+
+        <select name="units" id="units">
+            <option value="metric" selected>Metric</option>
+            <option value="imperial">Imperial</option>
+        </select>
+
+
         <label for="location"></label>
         <input type="search" name="" id="location">
 

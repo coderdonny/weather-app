@@ -1,13 +1,12 @@
 const body = document.querySelector('body');
 const search = document.querySelector('#location');
 const searchForm = document.querySelector('.search-form');
-const unitsOfMeasurement = document.querySelector('#units');
 
 searchForm.addEventListener('submit', function (e) {
 	e.preventDefault();
 	let location = search.value;
-	let units = unitsOfMeasurement.value;
 	console.log(location);
+	getLocation(location);
 });
 
 async function getLocation(location) {
@@ -27,9 +26,12 @@ async function getLocation(location) {
 }
 
 async function getWeather(lat, lon) {
+	const unitsOfMeasurement = document.querySelector('#units');
+	const unit =
+		unitsOfMeasurement.options[unitsOfMeasurement.selectedIndex].value;
 	try {
-		let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=0ba7cce150f486819412ea0336b94a65`;
-
+		let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${unit}&appid=0ba7cce150f486819412ea0336b94a65`;
+		console.log(url);
 		const response = await fetch(url, { mode: 'cors' });
 		const weatherData = await response.json();
 
