@@ -10,24 +10,29 @@
 </head>
 
 <body>
-    <form action="" class="search-form">
+    <header>
+        <form action="" class="search-form">
+            <label for="location"></label>
+            <input type="search" name="" id="location" value='Toronto'>
+            <select name="units" id="units">
+                <option value="metric" selected>Metric</option>
+                <option value="imperial">Imperial</option>
+            </select>
 
+            <button>search</button>
+        </form>
+    </header>
 
+    <div class="wrapper">
+        <div class="output-container">
+            <div id="weather-container">
 
-
-        <label for="location"></label>
-        <input type="search" name="" id="location">
-        <select name="units" id="units">
-            <option value="metric" selected>Metric</option>
-            <option value="imperial">Imperial</option>
-        </select>
-
-        <button>search</button>
-    </form>
-
-    <div id="weather-container">
-
+            </div>
+            <img class="weather-image" src="" alt="">
+        </div>
     </div>
+
+
 
     <script src="script.js"></script>
 </body>

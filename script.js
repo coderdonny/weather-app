@@ -25,6 +25,8 @@ function clearUI() {
 	}
 }
 
+getLocation('Toronto');
+
 async function getLocation(location) {
 	const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=0ba7cce150f486819412ea0336b94a65
 	`;
@@ -103,4 +105,21 @@ function displayData(data) {
 	weatherContainer.append(location);
 	weatherContainer.append(temp);
 	weatherContainer.append(weather);
+
+	changeImage(location.innerText);
+}
+
+async function changeImage(weather) {
+	const weatherImage = document.querySelector('.weather-image');
+	let searchValue = weather;
+	console.log(weather);
+	console.log(weather);
+	const response = await fetch(
+		'https://api.giphy.com/v1/gifs/translate?api_key=U7U0b65VE1bA9GhsdHXTqW9M4ndypm7q&s=' +
+			searchValue,
+		{ mode: 'cors' }
+	);
+	const imgData = await response.json();
+
+	weatherImage.src = imgData.data.images.original.url;
 }
